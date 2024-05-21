@@ -1,7 +1,8 @@
 "use client";
 
 // Components
-import { Header, Card, SectionList, Footer } from "components/core";
+import { Card } from "components/shared";
+import { Header, SectionList, Footer } from "components/core";
 
 // Hooks
 import { useGetProducts } from "hooks/useGetProducts";

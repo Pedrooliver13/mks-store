@@ -10,6 +10,7 @@ export type Product = {
   photo: string;
   updatedAt: string;
   createdAt: string;
+  quantity: number;
 };
 
 export interface AllProducts {
