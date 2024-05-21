@@ -1,5 +1,3 @@
-import { AxiosResponse } from "axios";
-
 // Libs
 import { api } from "lib/axios";
 
