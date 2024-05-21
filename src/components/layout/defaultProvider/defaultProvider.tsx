@@ -2,6 +2,7 @@
 import { ReactElement } from "react";
 import { StyleSheetManager, ThemeProvider } from "styled-components";
 import isPropValid from "@emotion/is-prop-valid";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 // Libs
 import StyledComponentsRegistry from "lib/registry";
@@ -17,21 +18,25 @@ interface DefaultProviderProps {
 export const DefaultProvider = ({
   children,
 }: DefaultProviderProps): ReactElement => {
+  const client = new QueryClient();
+
   return (
-    <StyledComponentsRegistry>
-      <StyleSheetManager
-        enableVendorPrefixes
-        shouldForwardProp={(propName, elementToBeRendered) => {
-          return typeof elementToBeRendered === "string"
-            ? isPropValid(propName)
-            : true;
-        }}
-      >
-        <ThemeProvider theme={defaultTheme}>
-          <GlobalStyle />
-          {children}
-        </ThemeProvider>
-      </StyleSheetManager>
-    </StyledComponentsRegistry>
+    <QueryClientProvider client={client}>
+      <StyledComponentsRegistry>
+        <StyleSheetManager
+          enableVendorPrefixes
+          shouldForwardProp={(propName, elementToBeRendered) => {
+            return typeof elementToBeRendered === "string"
+              ? isPropValid(propName)
+              : true;
+          }}
+        >
+          <ThemeProvider theme={defaultTheme}>
+            <GlobalStyle />
+            {children}
+          </ThemeProvider>
+        </StyleSheetManager>
+      </StyledComponentsRegistry>
+    </QueryClientProvider>
   );
 };

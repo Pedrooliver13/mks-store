@@ -8,7 +8,7 @@ export const GlobalStyle = createGlobalStyle`
   * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    box-sizing: border-box !important;
   }
 
   html {
@@ -20,6 +20,11 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+
+
     background-color: ${({ theme }) => theme.colors.white};
     color: ${({ theme }) => theme.colors["gray-800"]};
     --webkit-font-smoothing: antialised;
@@ -28,7 +33,7 @@ export const GlobalStyle = createGlobalStyle`
   body, input, textarea, button {
     font-weight: 400;
     font-family: ${({ theme }) => theme.fonts.default};
-    font-size: ${({ theme }) => theme.textSizes["text-m"]};
+    font-size: 1.6rem;
   }
 
   a {

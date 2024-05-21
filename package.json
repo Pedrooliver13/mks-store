@@ -10,6 +10,9 @@
   },
   "dependencies": {
     "@emotion/is-prop-valid": "^1.2.2",
+    "@radix-ui/react-dialog": "^1.0.5",
+    "@tanstack/react-query": "^5.37.1",
+    "axios": "^1.7.1",
     "next": "14.2.3",
     "phosphor-react": "^1.4.1",
     "react": "^18",

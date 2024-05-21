@@ -5,7 +5,11 @@ const nextConfig = {
     styledComponents: true,
   },
   images: {
-    domains: ["images.unsplash.com", "storage.googleapis.com"],
+    domains: [
+      "images.unsplash.com",
+      "storage.googleapis.com",
+      "mks-sistemas.nyc3.digitaloceanspaces.com",
+    ],
   },
 };
 

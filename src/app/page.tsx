@@ -1,13 +1,25 @@
+"use client";
+
 // Components
-import { Header, Card } from "components/core";
+import { Header, Card, SectionList, Footer } from "components/core";
+
+// Hooks
+import { useGetProducts } from "hooks/useGetProducts";
 
 export default function Home() {
+  const { data } = useGetProducts();
+
   return (
     <>
       <Header />
       <main>
-        <Card />
+        <SectionList>
+          {data?.products.map((product) => (
+            <Card key={product?.id} {...product} />
+          ))}
+        </SectionList>
       </main>
+      <Footer />
     </>
   );
 }

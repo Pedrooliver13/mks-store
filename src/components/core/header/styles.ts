@@ -47,6 +47,7 @@ export const HeaderContainer = styled.header`
       padding-bottom: 0.5rem;
       padding-right: 1rem;
       padding-left: 1rem;
+      cursor: pointer;
 
       span {
         color: ${theme.colors.black};
