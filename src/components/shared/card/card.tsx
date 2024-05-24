@@ -20,7 +20,7 @@ import * as Styled from "./styles";
 interface CardProps extends Product {}
 
 export const Card = (props: CardProps): ReactElement => {
-  const { cartList, addProductInCart, updateQuantityCoffeeInCart } =
+  const { cartList, addProductInCart, updateQuantityProductInCart } =
     useContext(GlobalContext);
 
   const handleClickAddProductInCart = (): void => {
@@ -34,7 +34,7 @@ export const Card = (props: CardProps): ReactElement => {
     );
 
     if (productAlreadySelected) {
-      updateQuantityCoffeeInCart(
+      updateQuantityProductInCart(
         product?.id,
         productAlreadySelected?.quantity + 1
       );
