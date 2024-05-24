@@ -1,10 +1,21 @@
 // Packages
-import { ReactElement, createContext, useReducer } from "react";
+import {
+  ReactElement,
+  createContext,
+  useReducer,
+  useCallback,
+  useEffect,
+} from "react";
+
+// Hooks
+import { useLocalStorage } from "hooks/useLocalStorage";
 
 // Reducers
 import {
   addProductInCartAction,
   removeProductInCartAction,
+  updateProductsInCartAction,
+  updateQuantityProductInCartAction,
 } from "reducers/action";
 import { productsReducer } from "reducers/reducer";
 
@@ -14,7 +25,8 @@ import { Product } from "services/products";
 export interface GlobalContextProps {
   cartList: Array<Product>;
   addProductInCart: (product: Product) => void;
-  removeProductInCart: (id: string) => void;
+  updateQuantityProductInCart: (id: number, quantity: number) => void;
+  removeProductInCart: (id: number) => void;
 }
 
 interface GlobalProviderProps {
@@ -32,17 +44,33 @@ const GlobalContextProvider = ({
 
   const { cartList } = productState;
 
-  const addProductInCart = (product: Product) => {
+  const addProductInCart = useCallback((product: Product) => {
     dispatch(addProductInCartAction(product));
-  };
+  }, []);
 
-  const removeProductInCart = (id: string) => {
+  const updateProductsInCart = useCallback((productList: Array<Product>) => {
+    dispatch(updateProductsInCartAction({ productList }));
+  }, []);
+
+  const updateQuantityProductInCart = useCallback(
+    (id: number, quantity: number) => {
+      dispatch(updateQuantityProductInCartAction({ id, quantity }));
+    },
+    []
+  );
+
+  const removeProductInCart = useCallback((id: number) => {
     dispatch(removeProductInCartAction(id));
-  };
+  }, []);
 
   return (
     <GlobalContext.Provider
-      value={{ cartList, addProductInCart, removeProductInCart }}
+      value={{
+        cartList,
+        addProductInCart,
+        updateQuantityProductInCart,
+        removeProductInCart,
+      }}
     >
       {children}
     </GlobalContext.Provider>

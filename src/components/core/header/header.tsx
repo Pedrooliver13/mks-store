@@ -1,7 +1,7 @@
 "use client";
 
 // Packages
-import { ReactElement } from "react";
+import { ReactElement, useContext } from "react";
 import { ShoppingCart as ShoppingCartIcon } from "phosphor-react";
 import * as Dialog from "@radix-ui/react-dialog";
 import Link from "next/link";
@@ -9,10 +9,15 @@ import Link from "next/link";
 // Components
 import { Cart } from "components/core";
 
+// Hooks
+import { useCart } from "hooks/useCart";
+
 // Styles
 import * as Styled from "./styles";
 
 export const Header = (): ReactElement => {
+  const { totalCartItems } = useCart();
+
   return (
     <Styled.HeaderContainer>
       <div className="content container">
@@ -25,7 +30,7 @@ export const Header = (): ReactElement => {
             <div className="cart">
               <ShoppingCartIcon size={18} />
 
-              <span>0</span>
+              <span>{totalCartItems}</span>
             </div>
           </Dialog.Trigger>
 

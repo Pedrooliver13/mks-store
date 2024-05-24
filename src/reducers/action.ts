@@ -3,6 +3,8 @@ import { Product } from "services/products";
 
 export enum ActionTypes {
   ADD_PRODUCT_IN_CART = "ADD_PRODUCT_IN_CART",
+  UPDATE_PRODUCTS_IN_CART = "UPDATE_PRODUCTS_IN_CART",
+  UPDATE_QUANTITY_PRODUCT_IN_CART = "UPDATE_QUANTITY_PRODUCT_IN_CART",
   REMOVE_PRODUCT_IN_CART = "REMOVE_PRODUCT_IN_CART",
 }
 
@@ -24,9 +26,38 @@ export const addProductInCartAction = (
   };
 };
 
+export const updateProductsInCartAction = ({
+  productList,
+}: {
+  productList: Array<Product>;
+}): ActionResponse<Array<Product>> => {
+  return {
+    type: ActionTypes.UPDATE_PRODUCTS_IN_CART,
+    payload: {
+      productList,
+    },
+  };
+};
+
+export const updateQuantityProductInCartAction = ({
+  id,
+  quantity,
+}: {
+  id: number;
+  quantity: number;
+}): ActionResponse<number> => {
+  return {
+    type: ActionTypes.UPDATE_QUANTITY_PRODUCT_IN_CART,
+    payload: {
+      id,
+      quantity,
+    },
+  };
+};
+
 export const removeProductInCartAction = (
-  id: string
-): ActionResponse<string> => {
+  id: number
+): ActionResponse<number> => {
   return {
     type: ActionTypes.REMOVE_PRODUCT_IN_CART,
     payload: {

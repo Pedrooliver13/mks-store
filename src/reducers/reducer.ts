@@ -18,6 +18,22 @@ export const productsReducer = (state: ProductState, action: any): any => {
         draft.cartList.push(action.payload.product);
       });
 
+    case ActionTypes.UPDATE_PRODUCTS_IN_CART:
+      return produce(state, (draft) => {
+        draft.cartList = action.payload.productList;
+      });
+
+    case ActionTypes.UPDATE_QUANTITY_PRODUCT_IN_CART:
+      return produce(state, (draft) => {
+        const productIndex = draft.cartList.findIndex(
+          (product) => product.id === action.payload.id
+        );
+
+        if (productIndex >= 0) {
+          draft.cartList[productIndex].quantity = action.payload.quantity;
+        }
+      });
+
     case ActionTypes.REMOVE_PRODUCT_IN_CART:
       return produce(state, (draft) => {
         const productIndex = draft.cartList.findIndex(

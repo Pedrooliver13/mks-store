@@ -8,6 +8,7 @@ const nextConfig = {
     domains: [
       "images.unsplash.com",
       "storage.googleapis.com",
+      "placehold.co",
       "mks-sistemas.nyc3.digitaloceanspaces.com",
     ],
   },

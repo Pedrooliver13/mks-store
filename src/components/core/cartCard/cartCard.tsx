@@ -1,37 +1,61 @@
 "use client";
 
 // Packages
-import { ReactElement } from "react";
+import { ReactElement, useContext } from "react";
 import Image from "next/image";
 import { X as XIcon } from "phosphor-react";
+
+// Components
+import { CounterButton } from "components/core";
+
+// Contexts
+import { GlobalContext } from "contexts/globalContext";
+
+// Services
+import { Product } from "services/products";
+
+// Utils
+import { priceFormatter } from "utils/formatter";
 
 // Styles
 import * as Styled from "./styles";
 
-export const CartCard = (): ReactElement => {
+interface CartCardProps extends Product {}
+
+export const CartCard = (props: CartCardProps): ReactElement => {
+  const { removeProductInCart, updateQuantityProductInCart } =
+    useContext(GlobalContext);
+
+  const handleClickRemoveProductInCart = (): void => {
+    removeProductInCart(props?.id);
+  };
+
+  const handleQuantityProductInCartChange = (quantity: number): void => {
+    updateQuantityProductInCart(props?.id, quantity);
+  };
+
   return (
     <Styled.cartCardContainer>
-      <div className="remove">
+      <div className="remove" onClick={handleClickRemoveProductInCart}>
         <XIcon size={20} />
       </div>
 
       <div className="image">
-        <Image
-          src={
-            "https://images.unsplash.com/photo-1715590876582-18e4844864a6?q=80&w=2574&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          }
-          alt={""}
-          width={100}
-          height={57}
-          priority
-        />
+        <Image src={props?.photo} alt={""} width={100} height={57} />
       </div>
 
-      <h1>Apple Watch Series 4 GPS</h1>
+      <h1>{props?.name}</h1>
 
       <div className="dashboard">
-        <div className="dashboard__counter">0</div>
-        <span className="dashboard__price">R$399</span>
+        <div className="dashboard__counter">
+          <CounterButton
+            value={props?.quantity}
+            getValue={(value) => handleQuantityProductInCartChange(value)}
+          />
+        </div>
+        <span className="dashboard__price">
+          {priceFormatter.format(props?.price)}
+        </span>
       </div>
     </Styled.cartCardContainer>
   );

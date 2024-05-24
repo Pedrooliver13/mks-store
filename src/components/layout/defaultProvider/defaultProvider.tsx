@@ -4,6 +4,9 @@ import { StyleSheetManager, ThemeProvider } from "styled-components";
 import isPropValid from "@emotion/is-prop-valid";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
+// Contexts
+import { GlobalContextProvider } from "contexts/globalContext";
+
 // Libs
 import StyledComponentsRegistry from "lib/registry";
 
@@ -22,21 +25,23 @@ export const DefaultProvider = ({
 
   return (
     <QueryClientProvider client={client}>
-      <StyledComponentsRegistry>
-        <StyleSheetManager
-          enableVendorPrefixes
-          shouldForwardProp={(propName, elementToBeRendered) => {
-            return typeof elementToBeRendered === "string"
-              ? isPropValid(propName)
-              : true;
-          }}
-        >
-          <ThemeProvider theme={defaultTheme}>
-            <GlobalStyle />
-            {children}
-          </ThemeProvider>
-        </StyleSheetManager>
-      </StyledComponentsRegistry>
+      <GlobalContextProvider>
+        <StyledComponentsRegistry>
+          <StyleSheetManager
+            enableVendorPrefixes
+            shouldForwardProp={(propName, elementToBeRendered) => {
+              return typeof elementToBeRendered === "string"
+                ? isPropValid(propName)
+                : true;
+            }}
+          >
+            <ThemeProvider theme={defaultTheme}>
+              <GlobalStyle />
+              {children}
+            </ThemeProvider>
+          </StyleSheetManager>
+        </StyledComponentsRegistry>
+      </GlobalContextProvider>
     </QueryClientProvider>
   );
 };

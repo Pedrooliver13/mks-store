@@ -12,27 +12,62 @@ export const cartCardContainer = styled.div`
     padding: 2.5rem;
     gap: 20px;
     align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+
+    @media (max-width: ${theme.breakpoints.SM}) {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      width: 250px;
+      height: auto;
+    }
 
     h1 {
-      width: 90px;
-      font-size: 13px;
+      font-size: 1.3rem;
       font-weight: 400;
+
+      @media (max-width: ${theme.breakpoints.SM}) {
+        font-size: 1.6rem;
+        text-align: center;
+        width: 100%;
+      }
     }
 
     .image {
-      width: 46px;
+      min-width: 46px;
       height: 57px;
+
+      @media (max-width: ${theme.breakpoints.SM}) {
+        height: auto;
+      }
     }
 
     .dashboard {
       flex: 1;
       display: flex;
+      align-items: center;
       justify-content: space-around;
-      gap: 20px;
+      gap: 10px;
+
+      @media (max-width: ${theme.breakpoints.SM}) {
+        align-items: center;
+        justify-content: space-between;
+      }
 
       &__price {
         max-width: 80px;
         font-weight: 800;
+
+        @media (max-width: ${theme.breakpoints.SM}) {
+          max-width: fit-content;
+          text-align: center;
+          background-color: ${theme.colors["gray-400"]};
+          color: ${theme.colors.white};
+          padding: 0.5rem;
+          border-radius: 5px;
+        }
       }
     }
 
