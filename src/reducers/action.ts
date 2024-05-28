@@ -26,11 +26,9 @@ export const addProductInCartAction = (
   };
 };
 
-export const updateProductsInCartAction = ({
-  productList,
-}: {
-  productList: Array<Product>;
-}): ActionResponse<Array<Product>> => {
+export const updateProductsInCartAction = (
+  productList: Array<Product>
+): ActionResponse<Array<Product>> => {
   return {
     type: ActionTypes.UPDATE_PRODUCTS_IN_CART,
     payload: {

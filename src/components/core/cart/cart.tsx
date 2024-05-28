@@ -21,8 +21,13 @@ import { priceFormatter } from "utils/formatter";
 import * as Styled from "./styles";
 
 export const Cart = (): ReactElement => {
-  const { cartList } = useContext(GlobalContext);
-  const { totalPriceCart } = useCart();
+  const { cartList, updateProductsInCart } = useContext(GlobalContext);
+  const { totalPriceCart, isDisabledSubmit } = useCart();
+
+  const handleSubmit = () => {
+    updateProductsInCart([]);
+    document.body.click();
+  };
 
   return (
     <Dialog.Portal>
@@ -47,9 +52,16 @@ export const Cart = (): ReactElement => {
         <div className="total">
           Total: <span>{priceFormatter.format(totalPriceCart)}</span>
         </div>
-        <button type="submit" disabled>
-          Finalizar Compra
-        </button>
+
+        <Dialog.Close asChild>
+          <button
+            type="submit"
+            disabled={isDisabledSubmit}
+            onClick={handleSubmit}
+          >
+            Finalizar Compra
+          </button>
+        </Dialog.Close>
       </Styled.Content>
     </Dialog.Portal>
   );

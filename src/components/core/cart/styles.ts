@@ -72,6 +72,10 @@ export const Content = styled(Dialog.Content)`
       margin-bottom: auto;
       max-height: 50vh;
       overflow-y: auto;
+
+      @media (max-width: ${theme.breakpoints.SM}) {
+        max-height: 60vh;
+      }
     }
 
     .total {

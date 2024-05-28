@@ -7,6 +7,7 @@ import { GlobalContext } from "contexts/globalContext";
 interface UseCartResponse {
   totalCartItems: number;
   totalPriceCart: number;
+  isDisabledSubmit: boolean;
 }
 
 export const useCart = (): UseCartResponse => {
@@ -23,5 +24,7 @@ export const useCart = (): UseCartResponse => {
     );
   }, [cartList]);
 
-  return { totalCartItems, totalPriceCart };
+  const isDisabledSubmit = useMemo(() => totalCartItems <= 0, [totalCartItems]);
+
+  return { totalCartItems, totalPriceCart, isDisabledSubmit };
 };

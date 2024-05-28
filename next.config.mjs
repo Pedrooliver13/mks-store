@@ -5,11 +5,22 @@ const nextConfig = {
     styledComponents: true,
   },
   images: {
-    domains: [
-      "images.unsplash.com",
-      "storage.googleapis.com",
-      "placehold.co",
-      "mks-sistemas.nyc3.digitaloceanspaces.com",
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+        pathname: "**",
+      },
+      {
+        protocol: "https",
+        hostname: "storage.googleapis.com",
+        pathname: "**",
+      },
+      {
+        protocol: "https",
+        hostname: "mks-sistemas.nyc3.digitaloceanspaces.com",
+        pathname: "**",
+      },
     ],
   },
 };
